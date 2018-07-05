@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Silent.DataStructures\Silent.Collections.csproj" />
+    <ProjectReference Include="..\Silent.Collections\Silent.Collections.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27729.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections", "Silent.DataStructures\Silent.Collections.csproj", "{23037E2B-53D1-4104-837D-30079F852E69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections", "Silent.Collections\Silent.Collections.csproj", "{23037E2B-53D1-4104-837D-30079F852E69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections.Tests", "Silent.DataStructures.Tests\Silent.Collections.Tests.csproj", "{2A306DED-2089-4FC2-B85A-46E71CDE25F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections.Tests", "Silent.Collections.Tests\Silent.Collections.Tests.csproj", "{2A306DED-2089-4FC2-B85A-46E71CDE25F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silent.Collections.Concurrent", "Silent.Collections.Concurrent\Silent.Collections.Concurrent.csproj", "{A461DF88-0A3F-4D4A-AC15-F6CB99191B56}"
 EndProject
