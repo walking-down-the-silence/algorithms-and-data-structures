@@ -1,6 +1,6 @@
 using System;
 
-namespace Common.Algorithms
+namespace Silent.Collections
 {
     public static class Arrays
     {

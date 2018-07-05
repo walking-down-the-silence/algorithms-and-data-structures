@@ -1,8 +1,8 @@
 using System.Linq;
-using Common.Algorithms;
+using Silent.Collections;
 using Xunit;
 
-namespace CommonTests
+namespace Silent.Collections.Tests
 {
     public class ArraysTests
     {

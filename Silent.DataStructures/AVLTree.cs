@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace Silent.Collections
 {
     /// <summary>
     /// The implementation of classic AVL Tree data structure

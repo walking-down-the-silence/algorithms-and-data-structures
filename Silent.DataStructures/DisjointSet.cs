@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace Silent.Collections
 {
     public class DisjointSet<TValue>
     {

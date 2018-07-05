@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Common.DataStructures
+namespace Silent.Collections
 {
     public class BinaryHeap<TKey> : IEnumerable<TKey>
     {

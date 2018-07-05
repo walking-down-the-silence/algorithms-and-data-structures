@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Common.DataStructures
+namespace Silent.Collections
 {
     public class Graph
     {

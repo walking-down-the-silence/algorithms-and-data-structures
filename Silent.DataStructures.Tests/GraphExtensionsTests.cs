@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Algorithms;
-using Common.DataStructures;
 using Xunit;
 
-namespace CommonTests
+namespace Silent.Collections.Tests
 {
     public class GraphExtensionsTests
     {

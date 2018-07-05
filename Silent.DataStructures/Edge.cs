@@ -1,6 +1,6 @@
 using System;
 
-namespace Common.DataStructures
+namespace Silent.Collections
 {
     public class Edge : IEquatable<Edge>
     {

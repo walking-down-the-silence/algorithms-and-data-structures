@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Common;
 using Xunit;
 
-namespace CommonTests
+namespace Silent.Collections.Tests
 {
     public class AvlTreeTests
     {

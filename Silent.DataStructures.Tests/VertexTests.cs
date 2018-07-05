@@ -1,7 +1,6 @@
 ﻿using Xunit;
-using Common.DataStructures;
 
-namespace CommonTests
+namespace Silent.Collections.Tests
 {
     public class VertexTests
     {

@@ -1,7 +1,6 @@
-﻿using Common.DataStructures;
-using Xunit;
+﻿using Xunit;
 
-namespace CommonTests
+namespace Silent.Collections.Tests
 {
     public class EdgeTests
     {

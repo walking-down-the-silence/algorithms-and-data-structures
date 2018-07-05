@@ -1,4 +1,4 @@
-namespace Common
+namespace Silent.Collections
 {
     public class TreeNode<TValue>
     {

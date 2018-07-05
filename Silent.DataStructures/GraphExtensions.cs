@@ -2,9 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Common.DataStructures;
 
-namespace Common.Algorithms
+namespace Silent.Collections
 {
     public static class GraphExtensions
     {
