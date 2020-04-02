@@ -8,9 +8,9 @@ namespace Silent.Collections.Tests
         public void Ctor_WithParameters_ShouldSetItselfAsParent_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var edge = new Edge(vertexA, vertexB, 0);
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var edge = new Edge<string>(vertexA, vertexB, 0);
 
             // Act
             bool actual = vertexA.OutboundEdges.Contains(edge);
@@ -25,10 +25,10 @@ namespace Silent.Collections.Tests
         public void Equals_WithDifferentVertices_IsFalse_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var edgeA = new Edge(vertexA, vertexA, 0);
-            var edgeB = new Edge(vertexB, vertexB, 0);
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var edgeA = new Edge<string>(vertexA, vertexA, 0);
+            var edgeB = new Edge<string>(vertexB, vertexB, 0);
 
             // Act
             bool actual = edgeA.Equals(edgeB);
@@ -42,10 +42,10 @@ namespace Silent.Collections.Tests
         public void Equals_WithCrossDifferentVertices_IsFalse_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var edgeA = new Edge(vertexA, vertexB, 0);
-            var edgeB = new Edge(vertexB, vertexA, 0);
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var edgeA = new Edge<string>(vertexA, vertexB, 0);
+            var edgeB = new Edge<string>(vertexB, vertexA, 0);
 
             // Act
             bool actual = edgeA.Equals(edgeB);
@@ -59,10 +59,10 @@ namespace Silent.Collections.Tests
         public void Equals_WithDifferentWeight_IsFalse_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var edgeA = new Edge(vertexA, vertexB, 10);
-            var edgeB = new Edge(vertexA, vertexB, 20);
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var edgeA = new Edge<string>(vertexA, vertexB, 10);
+            var edgeB = new Edge<string>(vertexA, vertexB, 20);
 
             // Act
             bool actual = edgeA.Equals(edgeB);
@@ -76,10 +76,10 @@ namespace Silent.Collections.Tests
         public void Equals_WithSameVerticesAndWeight_IsTrue_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var edgeA = new Edge(vertexA, vertexB, 0);
-            var edgeB = new Edge(vertexA, vertexB, 0);
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var edgeA = new Edge<string>(vertexA, vertexB, 0);
+            var edgeB = new Edge<string>(vertexA, vertexB, 0);
 
             // Act
             bool actual = edgeA.Equals(edgeB);

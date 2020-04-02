@@ -54,10 +54,7 @@ namespace Silent.Collections
             }
         }
 
-        public Guid Find(TValue value)
-        {
-            return _items[value].Id;
-        }
+        public Guid Find(TValue value) => _items[value].Id;
 
         private class DisjointSetGroup<T>
         {

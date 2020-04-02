@@ -2,16 +2,16 @@ using System;
 
 namespace Silent.Collections
 {
-    public static class Arrays
+    public static class ArrayExtensions
     {
-        public static void Swap<T>(T[] array, int i, int j)
+        public static void Swap<T>(this T[] array, int i, int j)
         {
             T temp = array[i];
             array[i] = array[j];
             array[j] = temp;
         }
 
-        public static void Shuffle<T>(T[] array)
+        public static void Shuffle<T>(this T[] array)
         {
             var random = new Random();
             for (int i = 0; i < array.Length; i++)
@@ -21,7 +21,7 @@ namespace Silent.Collections
             }
         }
 
-        public static void SelectionSort<T>(T[] array) where T : IComparable<T>
+        public static void SelectionSort<T>(this T[] array) where T : IComparable<T>
         {
             for (int i = 0; i < array.Length - 1; i++)
             {
@@ -39,7 +39,7 @@ namespace Silent.Collections
             }
         }
 
-        public static void InsertionSort<T>(T[] array) where T : IComparable<T>
+        public static void InsertionSort<T>(this T[] array) where T : IComparable<T>
         {
             for (int i = 1; i < array.Length; i++)
             {
@@ -53,7 +53,7 @@ namespace Silent.Collections
             }
         }
 
-        public static void BubbleSort<T>(T[] array) where T : IComparable<T>
+        public static void BubbleSort<T>(this T[] array) where T : IComparable<T>
         {
             bool somethingSwapped = true;
 
@@ -72,7 +72,7 @@ namespace Silent.Collections
             }
         }
 
-        public static void MergeSort<T>(T[] array) where T : IComparable<T>
+        public static void MergeSort<T>(this T[] array) where T : IComparable<T>
         {
             T[] mergeArray = new T[array.Length];
             InternalMergeSort(array, mergeArray, 0, array.Length - 1);
@@ -132,7 +132,7 @@ namespace Silent.Collections
             }
         }
 
-        public static void QuickSort<T>(T[] array) where T : IComparable<T>
+        public static void QuickSort<T>(this T[] array) where T : IComparable<T>
         {
             Shuffle(array);
             InternalQuickSort(array, 0, array.Length - 1);

@@ -154,11 +154,4 @@ namespace Silent.Collections
 
         private int GetRightChildIndex(int parentIndex) => 2 * parentIndex + 2;
     }
-
-    public enum BinaryHeapType
-    {
-        MinimumHeap,
-
-        MaximumHeap
-    }
 }

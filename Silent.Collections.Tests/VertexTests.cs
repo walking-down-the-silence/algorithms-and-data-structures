@@ -8,8 +8,8 @@ namespace Silent.Collections.Tests
         public void Vertex_Equals_IsFalse_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
 
             // Act
             bool actual = vertexA.Equals(vertexB);
@@ -23,8 +23,8 @@ namespace Silent.Collections.Tests
         public void Vertex_Equals_IsTrue_Test()
         {
             // Assign
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("a");
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("a");
 
             // Act
             bool actual = vertexA.Equals(vertexB);

@@ -2,9 +2,9 @@ using System;
 
 namespace Silent.Collections
 {
-    public class Edge : IEquatable<Edge>
+    public class Edge<T> : IEquatable<Edge<T>> where T : IEquatable<T>
     {
-        public Edge(Vertex startVertex, Vertex endVertex, int weight)
+        public Edge(Vertex<T> startVertex, Vertex<T> endVertex, int weight)
         {
             StartVertex = startVertex;
             EndVertex = endVertex;
@@ -14,22 +14,22 @@ namespace Silent.Collections
             EndVertex.InboundEdges.Add(this);
         }
 
-        public Vertex StartVertex { get; }
+        public Vertex<T> StartVertex { get; }
 
-        public Vertex EndVertex { get; }
+        public Vertex<T> EndVertex { get; }
 
         public int Weight { get; }
 
-        public bool Equals(Edge other)
+        public override int GetHashCode() => StartVertex.GetHashCode() ^ EndVertex.GetHashCode() ^ Weight;
+
+        public override bool Equals(object obj) => Equals(obj as Edge<T>);
+
+        public bool Equals(Edge<T> other)
         {
             return other != null
                    && StartVertex.Equals(other.StartVertex)
                    && EndVertex.Equals(other.EndVertex)
                    && Weight.Equals(other.Weight);
         }
-
-        public override int GetHashCode() => StartVertex.GetHashCode() ^ EndVertex.GetHashCode() ^ Weight;
-
-        public override bool Equals(object obj) => Equals(obj as Edge);
     }
 }

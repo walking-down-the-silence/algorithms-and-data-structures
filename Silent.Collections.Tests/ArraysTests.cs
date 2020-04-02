@@ -55,7 +55,7 @@ namespace Silent.Collections.Tests
             var sorted = GetSortedArray();
 
             // Act
-            Arrays.SelectionSort(shuffled);
+            ArrayExtensions.SelectionSort(shuffled);
 
             // Assert
             Assert.True(shuffled.SequenceEqual(sorted), ArraysMismatchMessage);
@@ -69,7 +69,7 @@ namespace Silent.Collections.Tests
             var sorted = GetSortedArray();
 
             // Act
-            Arrays.InsertionSort(shuffled);
+            ArrayExtensions.InsertionSort(shuffled);
 
             // Assert
             Assert.True(shuffled.SequenceEqual(sorted), ArraysMismatchMessage);
@@ -83,7 +83,7 @@ namespace Silent.Collections.Tests
             var sorted = GetSortedArray();
 
             // Act
-            Arrays.BubbleSort(shuffled);
+            ArrayExtensions.BubbleSort(shuffled);
 
             // Assert
             Assert.True(shuffled.SequenceEqual(sorted), ArraysMismatchMessage);
@@ -97,7 +97,7 @@ namespace Silent.Collections.Tests
             var sorted = GetSortedArray();
 
             // Act
-            Arrays.MergeSort(shuffled);
+            ArrayExtensions.MergeSort(shuffled);
 
             // Assert
             Assert.True(shuffled.SequenceEqual(sorted), ArraysMismatchMessage);
@@ -111,7 +111,7 @@ namespace Silent.Collections.Tests
             var sorted = GetSortedArray();
 
             // Act
-            Arrays.QuickSort(shuffled);
+            ArrayExtensions.QuickSort(shuffled);
 
             // Assert
             Assert.True(shuffled.SequenceEqual(sorted), ArraysMismatchMessage);

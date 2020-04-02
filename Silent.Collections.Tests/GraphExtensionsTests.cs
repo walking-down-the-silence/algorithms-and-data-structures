@@ -15,7 +15,7 @@ namespace Silent.Collections.Tests
 
             // Act
             var vertices = graph.BreadthFirstSearch(graph.Vertices.First(), graph.Vertices.Last());
-            var actual = vertices.Select(vectex => vectex.Label).Aggregate((current, label) => current + label);
+            var actual = vertices.Select(vectex => vectex.Value).Aggregate((current, label) => current + label);
 
             // Assert
             var expected = "abcdefg";
@@ -30,7 +30,7 @@ namespace Silent.Collections.Tests
 
             // Act
             var vertices = graph.DepthFirstSearch(graph.Vertices.First(), graph.Vertices.Last());
-            var actual = vertices.Select(vectex => vectex.Label).Aggregate((current, label) => current + label);
+            var actual = vertices.Select(vectex => vectex.Value).Aggregate((current, label) => current + label);
 
             // Assert
             var expected = "acgfbed";
@@ -161,7 +161,7 @@ namespace Silent.Collections.Tests
 
             // Act
             var result = graph.Tarjan();
-            var actual = result.Select(vectex => vectex.Label).Aggregate((current, label) => current + label);
+            var actual = result.Select(vectex => vectex.Value).Aggregate((current, label) => current + label);
 
             // Assert
             var expected = "321054876";
@@ -179,7 +179,7 @@ namespace Silent.Collections.Tests
                     graph["E", "H"], graph["E", "G"], graph["D", "C"], graph["I", "J"],
                     graph["E", "I"]
                 };
-            var expected = new MinimumSpanTree(expectedEdges, 48);
+            var expected = new MinimumSpanTree<string>(expectedEdges, 48);
 
             // Act
             var actual = graph.PrimsMinimumSpanningTree();
@@ -199,7 +199,7 @@ namespace Silent.Collections.Tests
                     graph["E", "H"], graph["E", "G"], graph["D", "C"], graph["I", "J"],
                     graph["E", "I"]
                 };
-            var expected = new MinimumSpanTree(expectedEdges, 48);
+            var expected = new MinimumSpanTree<string>(expectedEdges, 48);
 
             // Act
             var actual = graph.KruskalsMinimumSpanningTree();
@@ -215,7 +215,7 @@ namespace Silent.Collections.Tests
 
             // Act
             var result = graph.Dijkstra(graph[startLabel], graph[endLabel]);
-            var actual = result.Select(vectex => vectex.Label).Aggregate((current, label) => current + label);
+            var actual = result.Select(vectex => vectex.Value).Aggregate((current, label) => current + label);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -236,17 +236,17 @@ namespace Silent.Collections.Tests
 
         #region Tests setup and checks
 
-        private Graph CreateTestTreeGraph()
+        private DirectedGraph<string> CreateTestTreeGraph()
         {
-            var vertexA = new Vertex("a");
-            var vertexB = new Vertex("b");
-            var vertexC = new Vertex("c");
-            var vertexD = new Vertex("d");
-            var vertexE = new Vertex("e");
-            var vertexF = new Vertex("f");
-            var vertexG = new Vertex("g");
+            var vertexA = new Vertex<string>("a");
+            var vertexB = new Vertex<string>("b");
+            var vertexC = new Vertex<string>("c");
+            var vertexD = new Vertex<string>("d");
+            var vertexE = new Vertex<string>("e");
+            var vertexF = new Vertex<string>("f");
+            var vertexG = new Vertex<string>("g");
 
-            var graph = new Graph();
+            var graph = new DirectedGraph<string>();
             graph.SetVertex(vertexA);
             graph.SetVertex(vertexB);
             graph.SetVertex(vertexC);
@@ -254,30 +254,30 @@ namespace Silent.Collections.Tests
             graph.SetVertex(vertexE);
             graph.SetVertex(vertexF);
 
-            graph.SetEdge(new Edge(vertexA, vertexB, 0));
-            graph.SetEdge(new Edge(vertexA, vertexC, 0));
-            graph.SetEdge(new Edge(vertexB, vertexD, 0));
-            graph.SetEdge(new Edge(vertexB, vertexE, 0));
-            graph.SetEdge(new Edge(vertexC, vertexF, 0));
-            graph.SetEdge(new Edge(vertexC, vertexG, 0));
+            graph.SetEdge(new Edge<string>(vertexA, vertexB, 0));
+            graph.SetEdge(new Edge<string>(vertexA, vertexC, 0));
+            graph.SetEdge(new Edge<string>(vertexB, vertexD, 0));
+            graph.SetEdge(new Edge<string>(vertexB, vertexE, 0));
+            graph.SetEdge(new Edge<string>(vertexC, vertexF, 0));
+            graph.SetEdge(new Edge<string>(vertexC, vertexG, 0));
 
             return graph;
         }
 
-        private Graph CreateTestWeightedGraph()
+        private DirectedGraph<string> CreateTestWeightedGraph()
         {
-            var vertexA = new Vertex("A");
-            var vertexB = new Vertex("B");
-            var vertexC = new Vertex("C");
-            var vertexD = new Vertex("D");
-            var vertexE = new Vertex("E");
-            var vertexF = new Vertex("F");
-            var vertexG = new Vertex("G");
-            var vertexH = new Vertex("H");
-            var vertexI = new Vertex("I");
-            var vertexJ = new Vertex("J");
+            var vertexA = new Vertex<string>("A");
+            var vertexB = new Vertex<string>("B");
+            var vertexC = new Vertex<string>("C");
+            var vertexD = new Vertex<string>("D");
+            var vertexE = new Vertex<string>("E");
+            var vertexF = new Vertex<string>("F");
+            var vertexG = new Vertex<string>("G");
+            var vertexH = new Vertex<string>("H");
+            var vertexI = new Vertex<string>("I");
+            var vertexJ = new Vertex<string>("J");
 
-            var graph = new Graph();
+            var graph = new DirectedGraph<string>();
             graph.SetVertex(vertexA);
             graph.SetVertex(vertexB);
             graph.SetVertex(vertexC);
@@ -289,78 +289,78 @@ namespace Silent.Collections.Tests
             graph.SetVertex(vertexI);
             graph.SetVertex(vertexJ);
 
-            graph.SetEdge(new Edge(vertexA, vertexB, 3));
-            graph.SetEdge(new Edge(vertexA, vertexF, 2));
-            graph.SetEdge(new Edge(vertexB, vertexC, 17));
-            graph.SetEdge(new Edge(vertexB, vertexD, 16));
-            graph.SetEdge(new Edge(vertexC, vertexD, 8));
-            graph.SetEdge(new Edge(vertexC, vertexI, 18));
-            graph.SetEdge(new Edge(vertexD, vertexE, 11));
-            graph.SetEdge(new Edge(vertexD, vertexI, 4));
-            graph.SetEdge(new Edge(vertexE, vertexF, 1));
-            graph.SetEdge(new Edge(vertexE, vertexG, 6));
-            graph.SetEdge(new Edge(vertexE, vertexH, 5));
-            graph.SetEdge(new Edge(vertexE, vertexI, 10));
-            graph.SetEdge(new Edge(vertexF, vertexG, 7));
-            graph.SetEdge(new Edge(vertexG, vertexH, 15));
-            graph.SetEdge(new Edge(vertexH, vertexI, 12));
-            graph.SetEdge(new Edge(vertexH, vertexJ, 13));
-            graph.SetEdge(new Edge(vertexI, vertexJ, 9));
+            graph.SetEdge(new Edge<string>(vertexA, vertexB, 3));
+            graph.SetEdge(new Edge<string>(vertexA, vertexF, 2));
+            graph.SetEdge(new Edge<string>(vertexB, vertexC, 17));
+            graph.SetEdge(new Edge<string>(vertexB, vertexD, 16));
+            graph.SetEdge(new Edge<string>(vertexC, vertexD, 8));
+            graph.SetEdge(new Edge<string>(vertexC, vertexI, 18));
+            graph.SetEdge(new Edge<string>(vertexD, vertexE, 11));
+            graph.SetEdge(new Edge<string>(vertexD, vertexI, 4));
+            graph.SetEdge(new Edge<string>(vertexE, vertexF, 1));
+            graph.SetEdge(new Edge<string>(vertexE, vertexG, 6));
+            graph.SetEdge(new Edge<string>(vertexE, vertexH, 5));
+            graph.SetEdge(new Edge<string>(vertexE, vertexI, 10));
+            graph.SetEdge(new Edge<string>(vertexF, vertexG, 7));
+            graph.SetEdge(new Edge<string>(vertexG, vertexH, 15));
+            graph.SetEdge(new Edge<string>(vertexH, vertexI, 12));
+            graph.SetEdge(new Edge<string>(vertexH, vertexJ, 13));
+            graph.SetEdge(new Edge<string>(vertexI, vertexJ, 9));
 
-            graph.SetEdge(new Edge(vertexB, vertexA, 3));
-            graph.SetEdge(new Edge(vertexF, vertexA, 2));
-            graph.SetEdge(new Edge(vertexC, vertexB, 17));
-            graph.SetEdge(new Edge(vertexD, vertexB, 16));
-            graph.SetEdge(new Edge(vertexD, vertexC, 8));
-            graph.SetEdge(new Edge(vertexI, vertexC, 18));
-            graph.SetEdge(new Edge(vertexE, vertexD, 11));
-            graph.SetEdge(new Edge(vertexI, vertexD, 4));
-            graph.SetEdge(new Edge(vertexF, vertexE, 1));
-            graph.SetEdge(new Edge(vertexG, vertexE, 6));
-            graph.SetEdge(new Edge(vertexH, vertexE, 5));
-            graph.SetEdge(new Edge(vertexI, vertexE, 10));
-            graph.SetEdge(new Edge(vertexG, vertexF, 7));
-            graph.SetEdge(new Edge(vertexH, vertexG, 15));
-            graph.SetEdge(new Edge(vertexI, vertexH, 12));
-            graph.SetEdge(new Edge(vertexJ, vertexH, 13));
-            graph.SetEdge(new Edge(vertexJ, vertexI, 9));
+            graph.SetEdge(new Edge<string>(vertexB, vertexA, 3));
+            graph.SetEdge(new Edge<string>(vertexF, vertexA, 2));
+            graph.SetEdge(new Edge<string>(vertexC, vertexB, 17));
+            graph.SetEdge(new Edge<string>(vertexD, vertexB, 16));
+            graph.SetEdge(new Edge<string>(vertexD, vertexC, 8));
+            graph.SetEdge(new Edge<string>(vertexI, vertexC, 18));
+            graph.SetEdge(new Edge<string>(vertexE, vertexD, 11));
+            graph.SetEdge(new Edge<string>(vertexI, vertexD, 4));
+            graph.SetEdge(new Edge<string>(vertexF, vertexE, 1));
+            graph.SetEdge(new Edge<string>(vertexG, vertexE, 6));
+            graph.SetEdge(new Edge<string>(vertexH, vertexE, 5));
+            graph.SetEdge(new Edge<string>(vertexI, vertexE, 10));
+            graph.SetEdge(new Edge<string>(vertexG, vertexF, 7));
+            graph.SetEdge(new Edge<string>(vertexH, vertexG, 15));
+            graph.SetEdge(new Edge<string>(vertexI, vertexH, 12));
+            graph.SetEdge(new Edge<string>(vertexJ, vertexH, 13));
+            graph.SetEdge(new Edge<string>(vertexJ, vertexI, 9));
 
             return graph;
         }
 
-        private Graph CreateTestDirectlyAcyclicGraph()
+        private DirectedGraph<string> CreateTestDirectlyAcyclicGraph()
         {
-            var graph = new Graph();
+            var graph = new DirectedGraph<string>();
 
             for (int i = 0; i < 9; i++)
             {
-                graph.SetVertex(new Vertex(i.ToString()));
+                graph.SetVertex(new Vertex<string>(i.ToString()));
             }
 
-            graph.SetEdge(new Edge(graph["0"], graph["1"], 0));
-            graph.SetEdge(new Edge(graph["1"], graph["2"], 0));
-            graph.SetEdge(new Edge(graph["1"], graph["3"], 0));
-            graph.SetEdge(new Edge(graph["2"], graph["3"], 0));
-            graph.SetEdge(new Edge(graph["4"], graph["2"], 0));
-            graph.SetEdge(new Edge(graph["4"], graph["5"], 0));
-            graph.SetEdge(new Edge(graph["6"], graph["7"], 0));
-            graph.SetEdge(new Edge(graph["7"], graph["8"], 0));
-            graph.SetEdge(new Edge(graph["6"], graph["4"], 0));
+            graph.SetEdge(new Edge<string>(graph["0"], graph["1"], 0));
+            graph.SetEdge(new Edge<string>(graph["1"], graph["2"], 0));
+            graph.SetEdge(new Edge<string>(graph["1"], graph["3"], 0));
+            graph.SetEdge(new Edge<string>(graph["2"], graph["3"], 0));
+            graph.SetEdge(new Edge<string>(graph["4"], graph["2"], 0));
+            graph.SetEdge(new Edge<string>(graph["4"], graph["5"], 0));
+            graph.SetEdge(new Edge<string>(graph["6"], graph["7"], 0));
+            graph.SetEdge(new Edge<string>(graph["7"], graph["8"], 0));
+            graph.SetEdge(new Edge<string>(graph["6"], graph["4"], 0));
 
             return graph;
         }
 
-        private bool MinimumSpanningTreeEquals(MinimumSpanTree x, MinimumSpanTree y)
+        private bool MinimumSpanningTreeEquals(MinimumSpanTree<string> x, MinimumSpanTree<string> y)
         {
             if (x == null || y == null || x.Edges.Count != y.Edges.Count || x.Distance != y.Distance)
                 return false;
 
-            var thisEdgesKeys = new HashSet<Tuple<string, string>>(x.Edges.Select(key => new Tuple<string, string>(key.StartVertex.Label, key.EndVertex.Label)));
+            var thisEdgesKeys = new HashSet<Tuple<string, string>>(x.Edges.Select(key => new Tuple<string, string>(key.StartVertex.Value, key.EndVertex.Value)));
 
             foreach (var edge in y.Edges)
             {
-                var normalKey = new Tuple<string, string>(edge.StartVertex.Label, edge.EndVertex.Label);
-                var invertedKey = new Tuple<string, string>(edge.EndVertex.Label, edge.StartVertex.Label);
+                var normalKey = new Tuple<string, string>(edge.StartVertex.Value, edge.EndVertex.Value);
+                var invertedKey = new Tuple<string, string>(edge.EndVertex.Value, edge.StartVertex.Value);
                 if (!thisEdgesKeys.Contains(normalKey) && !thisEdgesKeys.Contains(invertedKey))
                 {
                     return false;
