@@ -27,5 +27,5 @@ jobs:
       run: dotnet pack --configuration Release --output artifacts
     - name: Publish .NET Core packages
       run: |
-        nuget source add -name "github" --source "https://nuget.pkg.github.com/walking-down-the-silence/index.json" --username walking-down-the-silence --password ${{ secrets.GITHUB_TOKEN }}
-        nuget push "artifacts/*.nupkg" --source "github" --skip-duplicate
+        dotnet nuget source add -name "github" --source "https://nuget.pkg.github.com/walking-down-the-silence/index.json" --username walking-down-the-silence --password ${{ secrets.GITHUB_TOKEN }}
+        dotnet nuget push "artifacts/*.nupkg" --source "github" --skip-duplicate
