@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageId>Silent.Collections.Concurrent</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>JustMeGaaRa</Authors>
+    <Company>Walking Down The Silence</Company>
+    <PackageDescription></PackageDescription>
+    <RepositoryUrl>https://github.com/walking-down-the-silence/algorithms-and-data-structures</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
