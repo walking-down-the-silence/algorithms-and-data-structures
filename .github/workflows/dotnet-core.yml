@@ -17,9 +17,6 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-        source-url: https://nuget.pkg.github.com/walking-down-the-silence/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}} 
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -29,4 +26,4 @@ jobs:
     - name: Pack .NET Core packages
       run: dotnet pack --configuration Release --output artifacts
     - name: Publish .NET Core packages
-      run: dotnet nuget push "artifacts/*.nupkg" --source "github" --password ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push "artifacts/*.nupkg" --source "github" --skip-duplicate --username walking-down-the-silence --password ${{ secrets.GITHUB_TOKEN }}
