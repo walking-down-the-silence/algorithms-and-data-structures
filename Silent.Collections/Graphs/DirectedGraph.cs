@@ -9,8 +9,8 @@ namespace Silent.Collections
         private readonly Dictionary<T, Vertex<T>> _vertices;
         private readonly Dictionary<(T, T), Edge<T>> _edges;
 
-        private ICollection<Vertex<T>> _cachedVertices;
-        private ICollection<Edge<T>> _cachedEdges;
+        private IReadOnlyCollection<Vertex<T>> _cachedVertices;
+        private IReadOnlyCollection<Edge<T>> _cachedEdges;
 
         public DirectedGraph()
         {
@@ -27,41 +27,78 @@ namespace Silent.Collections
             AddEdges(edges);
         }
 
-        public Vertex<T> this[T value] => _vertices.ContainsKey(value) ? _vertices[value] : default;
-
-        public Edge<T> this[T startLabel, T endLabel] => _edges.ContainsKey((startLabel, endLabel)) ? _edges[(startLabel, endLabel)] : default;
-
-        public ICollection<Vertex<T>> Vertices => _cachedVertices ?? (_cachedVertices = _vertices.Values);
-
-        public ICollection<Edge<T>> Edges => _cachedEdges ?? (_cachedEdges = _edges.Values);
-
-        public bool SetVertex(Vertex<T> vertex)
+        public Vertex<T> this[T value]
         {
-            if (vertex == null)
-                return false;
-
-            _vertices[vertex.Value] = vertex;
-            _cachedVertices = null;
-
-            return true;
+            get
+            {
+                return _vertices.ContainsKey(value)
+                    ? _vertices[value]
+                    : default;
+            }
         }
 
-        public bool SetEdge(Edge<T> edge)
+        public Edge<T> this[T startLabel, T endLabel]
         {
-            if (edge == null)
-                return false;
-
-            var key = (edge.StartVertex.Value, edge.EndVertex.Value);
-            _edges[key] = edge;
-            _cachedEdges = null;
-
-            return true;
+            get
+            {
+                return _edges.ContainsKey((startLabel, endLabel))
+                    ? _edges[(startLabel, endLabel)]
+                    : default;
+            }
         }
+
+        public IReadOnlyCollection<Vertex<T>> Vertices => _cachedVertices ?? (_cachedVertices = _vertices.Values);
+
+        public IReadOnlyCollection<Edge<T>> Edges => _cachedEdges ?? (_cachedEdges = _edges.Values);
+
+        public bool SetVertex(Vertex<T> vertex) => InternalSetVertex(vertex) != null;
+
+        public bool SetEdge(Edge<T> edge) => InternalSetEdge(edge) != null;
+
+        public bool RemoveVertex(Vertex<T> vertex)
+        {
+            return _vertices.Remove(vertex.Value)
+                && vertex.InboundEdges.Aggregate(true, (successfull, edge) => successfull && InternalRemoveEdge(edge))
+                && vertex.OutboundEdges.Aggregate(true, (successfull, edge) => successfull && InternalRemoveEdge(edge));
+        }
+
+        public bool RemoveEdge(Edge<T> edge) => InternalRemoveEdge(edge);
 
         public IAdjacencyMatrix<T> ToAdjacencyMatrix() => this;
 
-        private bool AddVertices(IEnumerable<Vertex<T>> vertices) => vertices.Aggregate(true, (current, vertex) => current && SetVertex(vertex));
+        private Vertex<T> InternalSetVertex(Vertex<T> vertex)
+        {
+            if (vertex == null) return null;
 
-        private bool AddEdges(IEnumerable<Edge<T>> edges) => edges.Aggregate(true, (current, edge) => current && SetEdge(edge));
+            _cachedVertices = null;
+            return (_vertices[vertex.Value] = vertex);
+        }
+
+        private Edge<T> InternalSetEdge(Edge<T> edge)
+        {
+            if (edge == null) return null;
+
+            var key = (edge.StartVertex.Value, edge.EndVertex.Value);
+            _cachedEdges = null;
+            return (_edges[key] = edge);
+        }
+
+        private bool InternalRemoveEdge(Edge<T> edge)
+        {
+            if (edge == null) return false;
+
+            var key = (edge.StartVertex.Value, edge.EndVertex.Value);
+            return _edges.Remove(key);
+        }
+
+        private bool AddVertices(IEnumerable<Vertex<T>> vertices)
+        {
+            return vertices.Aggregate(true, (current, vertex) => current && SetVertex(vertex));
+        }
+
+        private bool AddEdges(IEnumerable<Edge<T>> edges)
+        {
+            return edges.Aggregate(true, (current, edge) => current && InternalSetEdge(edge) != null);
+        }
     }
 }

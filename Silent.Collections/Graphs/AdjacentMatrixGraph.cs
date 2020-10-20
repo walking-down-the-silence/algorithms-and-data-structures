@@ -69,7 +69,12 @@ namespace Silent.Collections
             var outboundEdges = GetNeighbors(vertex)
                 .Where(neighbor => neighbor != null)
                 .Select(neighbor => new Edge<T>(vertex, neighbor, 1));
-            vertex.OutboundEdges.AddRange(outboundEdges);
+
+            foreach(var edge in outboundEdges)
+            {
+                vertex.SetOutboundEdge(edge);
+            }
+
             _grid[row, column] = vertex;
             return vertex;
         }

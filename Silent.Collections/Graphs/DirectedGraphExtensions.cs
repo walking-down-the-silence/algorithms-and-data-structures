@@ -8,12 +8,42 @@ namespace Silent.Collections
     {
         public static bool ContainsVertex<T>(this IDirectedGraph<T> graph, T value) where T : IEquatable<T>
         {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
             return graph[value] != default;
         }
 
         public static bool ContainsEdge<T>(this IAdjacencyMatrix<T> graph, T startValue, T endValue) where T : IEquatable<T>
         {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
             return graph[startValue, endValue] != default;
+        }
+
+        public static bool SetVertex<T>(this IDirectedGraph<T> graph, T value) where T : IEquatable<T>
+        {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+            var vertex = new Vertex<T>(value);
+            return graph.SetVertex(vertex);
+        }
+
+        public static bool SetEdge<T>(this IDirectedGraph<T> graph, Vertex<T> sourceVertex, Vertex<T> targetVertex, int weight) where T : IEquatable<T>
+        {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+            var edge = new Edge<T>(sourceVertex, targetVertex, weight);
+            sourceVertex.SetOutboundEdge(edge);
+            targetVertex.SetInboundEdge(edge);
+            return graph.SetEdge(edge);
+        }
+
+        public static bool SetBidirectionalEdge<T>(this IDirectedGraph<T> graph, Vertex<T> firstVertex, Vertex<T> secondVertex, int weight) where T : IEquatable<T>
+        {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+            var inboundEdge = new Edge<T>(firstVertex, secondVertex, weight);
+            var outboundEdge = new Edge<T>(secondVertex, firstVertex, weight);
+            firstVertex.SetOutboundEdge(inboundEdge);
+            secondVertex.SetInboundEdge(inboundEdge);
+            firstVertex.SetOutboundEdge(outboundEdge);
+            secondVertex.SetInboundEdge(outboundEdge);
+            return graph.SetEdge(inboundEdge) && graph.SetEdge(outboundEdge);
         }
 
         /// <summary>

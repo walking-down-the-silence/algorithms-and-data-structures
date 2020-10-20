@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Silent.Collections.Tests
 {
-    public class GraphExtensionsTests
+    public class DirectedGraphExtensionsTests
     {
         [Fact]
         public void BreadthFirstSearch_Test()
@@ -254,12 +254,12 @@ namespace Silent.Collections.Tests
             graph.SetVertex(vertexE);
             graph.SetVertex(vertexF);
 
-            graph.SetEdge(new Edge<string>(vertexA, vertexB, 0));
-            graph.SetEdge(new Edge<string>(vertexA, vertexC, 0));
-            graph.SetEdge(new Edge<string>(vertexB, vertexD, 0));
-            graph.SetEdge(new Edge<string>(vertexB, vertexE, 0));
-            graph.SetEdge(new Edge<string>(vertexC, vertexF, 0));
-            graph.SetEdge(new Edge<string>(vertexC, vertexG, 0));
+            graph.SetEdge(vertexA, vertexB, 0);
+            graph.SetEdge(vertexA, vertexC, 0);
+            graph.SetEdge(vertexB, vertexD, 0);
+            graph.SetEdge(vertexB, vertexE, 0);
+            graph.SetEdge(vertexC, vertexF, 0);
+            graph.SetEdge(vertexC, vertexG, 0);
 
             return graph;
         }
@@ -289,41 +289,41 @@ namespace Silent.Collections.Tests
             graph.SetVertex(vertexI);
             graph.SetVertex(vertexJ);
 
-            graph.SetEdge(new Edge<string>(vertexA, vertexB, 3));
-            graph.SetEdge(new Edge<string>(vertexA, vertexF, 2));
-            graph.SetEdge(new Edge<string>(vertexB, vertexC, 17));
-            graph.SetEdge(new Edge<string>(vertexB, vertexD, 16));
-            graph.SetEdge(new Edge<string>(vertexC, vertexD, 8));
-            graph.SetEdge(new Edge<string>(vertexC, vertexI, 18));
-            graph.SetEdge(new Edge<string>(vertexD, vertexE, 11));
-            graph.SetEdge(new Edge<string>(vertexD, vertexI, 4));
-            graph.SetEdge(new Edge<string>(vertexE, vertexF, 1));
-            graph.SetEdge(new Edge<string>(vertexE, vertexG, 6));
-            graph.SetEdge(new Edge<string>(vertexE, vertexH, 5));
-            graph.SetEdge(new Edge<string>(vertexE, vertexI, 10));
-            graph.SetEdge(new Edge<string>(vertexF, vertexG, 7));
-            graph.SetEdge(new Edge<string>(vertexG, vertexH, 15));
-            graph.SetEdge(new Edge<string>(vertexH, vertexI, 12));
-            graph.SetEdge(new Edge<string>(vertexH, vertexJ, 13));
-            graph.SetEdge(new Edge<string>(vertexI, vertexJ, 9));
+            graph.SetEdge(vertexA, vertexB, 3);
+            graph.SetEdge(vertexA, vertexF, 2);
+            graph.SetEdge(vertexB, vertexC, 17);
+            graph.SetEdge(vertexB, vertexD, 16);
+            graph.SetEdge(vertexC, vertexD, 8);
+            graph.SetEdge(vertexC, vertexI, 18);
+            graph.SetEdge(vertexD, vertexE, 11);
+            graph.SetEdge(vertexD, vertexI, 4);
+            graph.SetEdge(vertexE, vertexF, 1);
+            graph.SetEdge(vertexE, vertexG, 6);
+            graph.SetEdge(vertexE, vertexH, 5);
+            graph.SetEdge(vertexE, vertexI, 10);
+            graph.SetEdge(vertexF, vertexG, 7);
+            graph.SetEdge(vertexG, vertexH, 15);
+            graph.SetEdge(vertexH, vertexI, 12);
+            graph.SetEdge(vertexH, vertexJ, 13);
+            graph.SetEdge(vertexI, vertexJ, 9);
 
-            graph.SetEdge(new Edge<string>(vertexB, vertexA, 3));
-            graph.SetEdge(new Edge<string>(vertexF, vertexA, 2));
-            graph.SetEdge(new Edge<string>(vertexC, vertexB, 17));
-            graph.SetEdge(new Edge<string>(vertexD, vertexB, 16));
-            graph.SetEdge(new Edge<string>(vertexD, vertexC, 8));
-            graph.SetEdge(new Edge<string>(vertexI, vertexC, 18));
-            graph.SetEdge(new Edge<string>(vertexE, vertexD, 11));
-            graph.SetEdge(new Edge<string>(vertexI, vertexD, 4));
-            graph.SetEdge(new Edge<string>(vertexF, vertexE, 1));
-            graph.SetEdge(new Edge<string>(vertexG, vertexE, 6));
-            graph.SetEdge(new Edge<string>(vertexH, vertexE, 5));
-            graph.SetEdge(new Edge<string>(vertexI, vertexE, 10));
-            graph.SetEdge(new Edge<string>(vertexG, vertexF, 7));
-            graph.SetEdge(new Edge<string>(vertexH, vertexG, 15));
-            graph.SetEdge(new Edge<string>(vertexI, vertexH, 12));
-            graph.SetEdge(new Edge<string>(vertexJ, vertexH, 13));
-            graph.SetEdge(new Edge<string>(vertexJ, vertexI, 9));
+            graph.SetEdge(vertexB, vertexA, 3);
+            graph.SetEdge(vertexF, vertexA, 2);
+            graph.SetEdge(vertexC, vertexB, 17);
+            graph.SetEdge(vertexD, vertexB, 16);
+            graph.SetEdge(vertexD, vertexC, 8);
+            graph.SetEdge(vertexI, vertexC, 18);
+            graph.SetEdge(vertexE, vertexD, 11);
+            graph.SetEdge(vertexI, vertexD, 4);
+            graph.SetEdge(vertexF, vertexE, 1);
+            graph.SetEdge(vertexG, vertexE, 6);
+            graph.SetEdge(vertexH, vertexE, 5);
+            graph.SetEdge(vertexI, vertexE, 10);
+            graph.SetEdge(vertexG, vertexF, 7);
+            graph.SetEdge(vertexH, vertexG, 15);
+            graph.SetEdge(vertexI, vertexH, 12);
+            graph.SetEdge(vertexJ, vertexH, 13);
+            graph.SetEdge(vertexJ, vertexI, 9);
 
             return graph;
         }
@@ -337,15 +337,15 @@ namespace Silent.Collections.Tests
                 graph.SetVertex(new Vertex<string>(i.ToString()));
             }
 
-            graph.SetEdge(new Edge<string>(graph["0"], graph["1"], 0));
-            graph.SetEdge(new Edge<string>(graph["1"], graph["2"], 0));
-            graph.SetEdge(new Edge<string>(graph["1"], graph["3"], 0));
-            graph.SetEdge(new Edge<string>(graph["2"], graph["3"], 0));
-            graph.SetEdge(new Edge<string>(graph["4"], graph["2"], 0));
-            graph.SetEdge(new Edge<string>(graph["4"], graph["5"], 0));
-            graph.SetEdge(new Edge<string>(graph["6"], graph["7"], 0));
-            graph.SetEdge(new Edge<string>(graph["7"], graph["8"], 0));
-            graph.SetEdge(new Edge<string>(graph["6"], graph["4"], 0));
+            graph.SetEdge(graph["0"], graph["1"], 0);
+            graph.SetEdge(graph["1"], graph["2"], 0);
+            graph.SetEdge(graph["1"], graph["3"], 0);
+            graph.SetEdge(graph["2"], graph["3"], 0);
+            graph.SetEdge(graph["4"], graph["2"], 0);
+            graph.SetEdge(graph["4"], graph["5"], 0);
+            graph.SetEdge(graph["6"], graph["7"], 0);
+            graph.SetEdge(graph["7"], graph["8"], 0);
+            graph.SetEdge(graph["6"], graph["4"], 0);
 
             return graph;
         }

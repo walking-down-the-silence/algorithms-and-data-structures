@@ -4,26 +4,31 @@ using System.Linq;
 
 namespace Silent.Collections
 {
-    public class Vertex<T> : IEquatable<Vertex<T>> where T: IEquatable<T>
+    public class Vertex<T> : IEquatable<Vertex<T>> where T : IEquatable<T>
     {
+        private readonly List<Edge<T>> _inboundEdges = new List<Edge<T>>();
+        private readonly List<Edge<T>> _outboundEdges = new List<Edge<T>>();
+
         public Vertex(T value)
         {
             Value = value;
-            InboundEdges = new List<Edge<T>>();
-            OutboundEdges = new List<Edge<T>>();
         }
 
         public T Value { get; set; }
 
-        public List<Edge<T>> InboundEdges { get; }
+        public IReadOnlyCollection<Edge<T>> InboundEdges => _inboundEdges;
 
-        public List<Edge<T>> OutboundEdges { get; }
+        public IReadOnlyCollection<Edge<T>> OutboundEdges => _outboundEdges;
 
         public IEnumerable<Vertex<T>> Neighbors => OutboundEdges.Select(x => x.EndVertex);
 
         public override int GetHashCode() => Value.GetHashCode();
 
         public override bool Equals(object obj) => Equals(obj as Vertex<T>);
+
+        public void SetInboundEdge(Edge<T> edge) => _inboundEdges.Add(edge);
+
+        public void SetOutboundEdge(Edge<T> edge) => _outboundEdges.Add(edge);
 
         public bool Equals(Vertex<T> other)
         {

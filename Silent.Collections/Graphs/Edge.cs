@@ -9,9 +9,6 @@ namespace Silent.Collections
             StartVertex = startVertex;
             EndVertex = endVertex;
             Weight = weight;
-
-            StartVertex.OutboundEdges.Add(this);
-            EndVertex.InboundEdges.Add(this);
         }
 
         public Vertex<T> StartVertex { get; }
