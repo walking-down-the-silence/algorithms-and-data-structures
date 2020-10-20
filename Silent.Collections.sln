@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27729.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30608.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections", "Silent.Collections\Silent.Collections.csproj", "{23037E2B-53D1-4104-837D-30079F852E69}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections.Tests", "Silent.Collections.Tests\Silent.Collections.Tests.csproj", "{2A306DED-2089-4FC2-B85A-46E71CDE25F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silent.Collections.Concurrent", "Silent.Collections.Concurrent\Silent.Collections.Concurrent.csproj", "{A461DF88-0A3F-4D4A-AC15-F6CB99191B56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections.Concurrent", "Silent.Collections.Concurrent\Silent.Collections.Concurrent.csproj", "{A461DF88-0A3F-4D4A-AC15-F6CB99191B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silent.Collections.Concurrent.Tests", "Silent.Collections.Concurrent.Tests\Silent.Collections.Concurrent.Tests.csproj", "{A248FDED-DD17-484C-89FE-15A186B8F7CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Silent.Collections.Concurrent.Tests", "Silent.Collections.Concurrent.Tests\Silent.Collections.Concurrent.Tests.csproj", "{A248FDED-DD17-484C-89FE-15A186B8F7CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A32A2AE6-E3E1-4175-BA12-53E571468CCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4C68E944-A11F-4FFA-A0A0-40099C20B851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23037E2B-53D1-4104-837D-30079F852E69} = {A32A2AE6-E3E1-4175-BA12-53E571468CCB}
+		{2A306DED-2089-4FC2-B85A-46E71CDE25F6} = {4C68E944-A11F-4FFA-A0A0-40099C20B851}
+		{A461DF88-0A3F-4D4A-AC15-F6CB99191B56} = {A32A2AE6-E3E1-4175-BA12-53E571468CCB}
+		{A248FDED-DD17-484C-89FE-15A186B8F7CE} = {4C68E944-A11F-4FFA-A0A0-40099C20B851}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A58AD78-F5EA-432A-A4F9-68FAF1CC588A}

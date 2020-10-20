@@ -1,0 +1,54 @@
+name: .NET Core
+
+on:
+  push:
+    branches:
+    - 'master'
+    - 'feature/*'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    if: github.ref != 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+
+
+  publish:
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Pack .NET Core packages
+      run: dotnet pack --configuration Release --output artifacts
+    - name: Publish .NET Core packages
+      run: |
+        dotnet nuget add source --name "github" "https://nuget.pkg.github.com/walking-down-the-silence/index.json" --username walking-down-the-silence --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
+        dotnet nuget push "artifacts/*.nupkg" --source "github" --skip-duplicate
