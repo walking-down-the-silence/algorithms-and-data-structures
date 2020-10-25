@@ -1,31 +1,49 @@
 name: .NET Core
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [ push, pull_request ]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.301
-    - name: Install dependencies
+
+    - name: Restore .NET Dependencies
       run: dotnet restore
-    - name: Build
+
+    - name: Build .NET Project
       run: dotnet build --configuration Release --no-restore
-    - name: Test
+
+    - name: Test .NET Project
       run: dotnet test --no-restore --verbosity normal
-    - name: Pack .NET Core packages
-      run: dotnet pack --configuration Release --output artifacts
-    - name: Publish .NET Core packages
+
+  pack-and-push:
+
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/master'
+
+    needs: build-and-test
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+
+    - name: Pack .NET Packages
+      run: dotnet pack --configuration Release --output artifacts/nuget
+
+    - name: Push .NET Packages to GitHub Repository
       run: |
         dotnet nuget add source --name "github" "https://nuget.pkg.github.com/walking-down-the-silence/index.json" --username walking-down-the-silence --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
-        dotnet nuget push "artifacts/*.nupkg" --source "github" --skip-duplicate
+        dotnet nuget push "artifacts/nuget/*.nupkg" --source "github" --skip-duplicate
