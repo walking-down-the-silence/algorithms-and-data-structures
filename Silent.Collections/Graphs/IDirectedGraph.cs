@@ -7,12 +7,16 @@ namespace Silent.Collections
     {
         Vertex<T> this[T value] { get; }
 
-        ICollection<Vertex<T>> Vertices { get; }
+        IReadOnlyCollection<Vertex<T>> Vertices { get; }
 
-        ICollection<Edge<T>> Edges { get; }
+        IReadOnlyCollection<Edge<T>> Edges { get; }
 
         bool SetVertex(Vertex<T> vertex);
 
-        bool SetEdge(Edge<T> edge);
+        bool SetEdge(Vertex<T> sourceVertex, Vertex<T> targetVertex, int weight);
+
+        bool RemoveVertex(Vertex<T> vertex);
+
+        bool RemoveEdge(Edge<T> edge);
     }
 }

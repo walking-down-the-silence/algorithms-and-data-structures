@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System.Linq;
+using Xunit;
 
 namespace Silent.Collections.Tests
 {
@@ -17,7 +18,7 @@ namespace Silent.Collections.Tests
             actual &= vertexB.InboundEdges.Contains(edge);
 
             // Assert
-            bool expected = true;
+            bool expected = false;
             Assert.Equal(expected, actual);
         }
 

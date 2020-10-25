@@ -8,12 +8,43 @@ namespace Silent.Collections
     {
         public static bool ContainsVertex<T>(this IDirectedGraph<T> graph, T value) where T : IEquatable<T>
         {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+
             return graph[value] != default;
         }
 
         public static bool ContainsEdge<T>(this IAdjacencyMatrix<T> graph, T startValue, T endValue) where T : IEquatable<T>
         {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+
             return graph[startValue, endValue] != default;
+        }
+
+        public static bool SetVertex<T>(this IDirectedGraph<T> graph, T value) where T : IEquatable<T>
+        {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+
+            var vertex = new Vertex<T>(value);
+            return graph.SetVertex(vertex);
+        }
+
+        public static bool SetBidirectionalEdge<T>(this IDirectedGraph<T> graph, Vertex<T> firstVertex, Vertex<T> secondVertex, int weight) where T : IEquatable<T>
+        {
+            if (graph is null) throw new ArgumentNullException(nameof(graph));
+
+            return graph.SetEdge(firstVertex, secondVertex, weight)
+                && graph.SetEdge(secondVertex, firstVertex, weight);
+        }
+
+        public static IDirectedGraph<T> Merge<T>(this IDirectedGraph<T> sourceGraph, IDirectedGraph<T> targetGraph) where T : IEquatable<T>
+        {
+            if (sourceGraph is null) throw new ArgumentNullException(nameof(sourceGraph));
+            if (targetGraph is null) throw new ArgumentNullException(nameof(targetGraph));
+
+            var allVertices = sourceGraph.Vertices.Concat(targetGraph.Vertices);
+            var allEdges = sourceGraph.Edges.Concat(targetGraph.Edges);
+            var mergedGraph = new DirectedGraph<T>(allVertices, allEdges);
+            return mergedGraph;
         }
 
         /// <summary>
@@ -44,11 +75,11 @@ namespace Silent.Collections
                 var startVertex = graph[startLabel];
                 var endVertex = graph[endLabel];
 
-                graph.SetEdge(new Edge<string>(startVertex, endVertex, weight));
+                graph.SetEdge(startVertex, endVertex, weight);
 
                 if (!directedGraph)
                 {
-                    graph.SetEdge(new Edge<string>(endVertex, startVertex, weight));
+                    graph.SetEdge(endVertex, startVertex, weight);
                 }
             }
         }
