@@ -13,7 +13,7 @@ namespace Silent.Collections
 
         bool SetVertex(Vertex<T> vertex);
 
-        bool SetEdge(Edge<T> edge);
+        bool SetEdge(Vertex<T> sourceVertex, Vertex<T> targetVertex, int weight);
 
         bool RemoveVertex(Vertex<T> vertex);
 

@@ -77,7 +77,7 @@ namespace Silent.Collections.Tests.Graphs
             // Act
             graph.SetVertex(sourceVertex);
             graph.SetVertex(targetVertex);
-            graph.SetEdge(edge);
+            graph.SetEdge(sourceVertex, targetVertex, 0);
 
             // Assert
             Assert.NotNull(graph.Vertices);
@@ -98,7 +98,7 @@ namespace Silent.Collections.Tests.Graphs
             // Act
             graph.SetVertex(sourceVertex);
             graph.SetVertex(targetVertex);
-            graph.SetEdge(edge);
+            graph.SetEdge(sourceVertex, targetVertex, 0);
             graph.RemoveEdge(edge);
 
             // Assert

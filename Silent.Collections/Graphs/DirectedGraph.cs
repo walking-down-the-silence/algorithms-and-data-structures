@@ -53,7 +53,13 @@ namespace Silent.Collections
 
         public bool SetVertex(Vertex<T> vertex) => InternalSetVertex(vertex) != null;
 
-        public bool SetEdge(Edge<T> edge) => InternalSetEdge(edge) != null;
+        public bool SetEdge(Vertex<T> sourceVertex, Vertex<T> targetVertex, int weight)
+        {
+            var edge = new Edge<T>(sourceVertex, targetVertex, weight);
+            sourceVertex.SetOutboundEdge(edge);
+            targetVertex.SetInboundEdge(edge);
+            return InternalSetEdge(edge) != null;
+        }
 
         public bool RemoveVertex(Vertex<T> vertex)
         {
@@ -63,8 +69,6 @@ namespace Silent.Collections
         }
 
         public bool RemoveEdge(Edge<T> edge) => InternalRemoveEdge(edge);
-
-        public IAdjacencyMatrix<T> ToAdjacencyMatrix() => this;
 
         private Vertex<T> InternalSetVertex(Vertex<T> vertex)
         {

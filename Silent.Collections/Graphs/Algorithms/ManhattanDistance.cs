@@ -12,4 +12,11 @@ namespace Silent.Collections
             return Math.Abs(source.Value.X - target.Value.X) + Math.Abs(source.Value.Y - target.Value.Y);
         }
     }
+
+    public interface IPosition
+    {
+        public int X { get; set; }
+
+        public int Y { get; set; }
+    }
 }
