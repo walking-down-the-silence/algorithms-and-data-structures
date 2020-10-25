@@ -6,7 +6,7 @@
     <Version>0.1.0</Version>
     <Authors>JustMeGaaRa</Authors>
     <Company>Walking Down The Silence</Company>
-    <PackageDescription></PackageDescription>
+    <PackageDescription>A set of concurrent data structures which are missing from System.Collections.Concurrent namespace.</PackageDescription>
     <RepositoryUrl>https://github.com/walking-down-the-silence/algorithms-and-data-structures</RepositoryUrl>
   </PropertyGroup>
 
